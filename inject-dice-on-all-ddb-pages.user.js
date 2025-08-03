@@ -4,8 +4,8 @@
 // @version      0.01
 // @description  Better tooltips DDB
 // @author       Azmoria
-// @downloadURL  https://github.com/Azmoria/better-ddb-tooltips/raw/main/better-ddb-tooltips.user.js
-// @updateURL    https://github.com/Azmoria/better-ddb-tooltips/raw/main/better-ddb-tooltips.user.js
+// @downloadURL  https://github.com/Azmoria/dice-on-all-ddb-pages/raw/refs/heads/main/inject-dice-on-all-ddb-pages.user.js
+// @updateURL    https://github.com/Azmoria/dice-on-all-ddb-pages/raw/refs/heads/main/inject-dice-on-all-ddb-pages.user.js
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @require https://code.jquery.com/jquery-3.6.0.min.js
 // @match        https://www.dndbeyond.com/*
