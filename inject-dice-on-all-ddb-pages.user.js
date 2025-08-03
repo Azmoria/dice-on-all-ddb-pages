@@ -19,7 +19,6 @@
 (function() {
     'use strict';
     inject_dice()
-    init_links_observe();
 })();
 
 function inject_dice(){
