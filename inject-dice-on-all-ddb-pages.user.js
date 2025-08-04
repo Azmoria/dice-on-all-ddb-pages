@@ -12,6 +12,8 @@
 // @exclude     https://www.dndbeyond.com/*abovevtt*
 // @exclude     https://www.dndbeyond.com/*encounter*
 // @exclude     https://www.dndbeyond.com/*character*
+// @exclude     /^https://www.dndbeyond.com/campaigns/\d+$/
+
 // @run-at       document-end
 
 // ==/UserScript==
@@ -127,7 +129,24 @@ function inject_dice(){
         </div>
         <script src="https://media.dndbeyond.com/encounter-builder/static/js/main.221d749b.js"></script>
         <link rel="stylesheet" href="https://media.dndbeyond.com/game-log-client/css/_dndbeyond_game_log_client.f9120ac7.css" />
-        <link rel="stylesheet" href="https://media.dndbeyond.com/character-tools/styles.bba89e51f2a645f81abb.min.css" />
+         <style>
+          .dice-rolling-panel,.dice-rolling-panel__container {
+              width: 100%;
+              height: 100%;
+              position: fixed;
+              top: 0;
+              pointer-events: none;
+              left: 0;
+          }
+
+          .dice-rolling-panel .dice-toolbar {
+              position: fixed;
+              z-index: 1;
+              bottom: 10px;
+              left: 10px;
+              pointer-events: all
+          }
+        </style>
   </div>
   `);
 }
