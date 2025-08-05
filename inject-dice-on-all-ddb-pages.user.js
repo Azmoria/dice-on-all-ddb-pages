@@ -134,6 +134,7 @@ function inject_dice(){
               top: 0;
               pointer-events: none;
               left: 0;
+              z-index: 10000000;
           }
 
           .dice-rolling-panel .dice-toolbar {
