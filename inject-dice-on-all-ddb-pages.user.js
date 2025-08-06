@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Inject Dice on all DDB pages
 // @namespace    github.com/azmoria
-// @version      0.5
+// @version      0.6
 // @description  Add dice to more DDB pages
 // @author       Azmoria
 // @downloadURL  https://github.com/Azmoria/dice-on-all-ddb-pages/raw/refs/heads/main/inject-dice-on-all-ddb-pages.user.js
@@ -33,7 +33,7 @@ function inject_dice(){
     const mutation_target = body[0];
     //observers changes to body direct children being removed/added
     const mutation_config = { attributes: false, childList: true, characterData: false, subtree: true };
-    window.encounterBuilderObserver.observe(mutation_target, mutation_config)
+    window.encounterBuilderObserver.observe(mutation_target, mutation_config);
     add_styles(body);
     add_gamelog(body);
     add_message_broker(body);
@@ -56,7 +56,7 @@ function add_message_broker(container){
 
 function add_dice(container){
     container.append(`
-<div class="container">
+<div class="container no-transform">
 <div id="encounter-builder-root" data-config="{&quot;assetBasePath&quot;:&quot;https://media.dndbeyond.com/encounter-builder&quot;,&quot;authUrl&quot;:&quot;https://auth-service.dndbeyond.com/v1/cobalt-token&quot;,&quot;campaignDetailsPageBaseUrl&quot;:&quot;https://www.dndbeyond.com/campaigns&quot;,&quot;campaignServiceUrlBase&quot;:&quot;https://www.dndbeyond.com/api/campaign&quot;,&quot;characterServiceUrlBase&quot;:&quot;https://character-service-scds.dndbeyond.com/v2/characters&quot;,&quot;diceApi&quot;:&quot;https://dice-service.dndbeyond.com&quot;,&quot;gameLogBaseUrl&quot;:&quot;https://www.dndbeyond.com&quot;,&quot;ddbApiUrl&quot;:&quot;https://api.dndbeyond.com&quot;,&quot;ddbBaseUrl&quot;:&quot;https://www.dndbeyond.com&quot;,&quot;ddbConfigUrl&quot;:&quot;https://www.dndbeyond.com/api/config/json&quot;,&quot;debug&quot;:false,&quot;encounterServiceUrl&quot;:&quot;https://encounter-service.dndbeyond.com/v1&quot;,&quot;featureFlagsDomain&quot;:&quot;https://api.dndbeyond.com&quot;,&quot;mediaBucket&quot;:&quot;https://media.dndbeyond.com&quot;,&quot;monsterServiceUrl&quot;:&quot;https://monster-service.dndbeyond.com/v1/Monster&quot;,&quot;sourceUrlBase&quot;:&quot;https://www.dndbeyond.com/sources/&quot;,&quot;subscriptionUrl&quot;:&quot;https://www.dndbeyond.com/subscribe&quot;}" >
 <div class="encounter-details">
            </div>
@@ -136,6 +136,12 @@ function add_dice(container){
 
 function add_styles(container){
     container.append(`<style>
+            .no-transform {
+                -webkit-transform: none !improtant;
+                transform: none !important;
+                backface-visibility: unset !important;
+                perspective: unset !important;
+            }
             .sidebar{
               position: fixed !important;
               top: 120px !important;
