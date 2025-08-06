@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Inject Dice on all DDB pages
 // @namespace    github.com/azmoria
-// @version      0.04
+// @version      0.4
 // @description  Add dice to more DDB pages
 // @author       Azmoria
 // @downloadURL  https://github.com/Azmoria/dice-on-all-ddb-pages/raw/refs/heads/main/inject-dice-on-all-ddb-pages.user.js
