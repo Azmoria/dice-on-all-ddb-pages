@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Inject Dice on all DDB pages
 // @namespace    github.com/azmoria
-// @version      0.6
+// @version      0.7
 // @description  Add dice to more DDB pages
 // @author       Azmoria
 // @downloadURL  https://github.com/Azmoria/dice-on-all-ddb-pages/raw/refs/heads/main/inject-dice-on-all-ddb-pages.user.js
@@ -24,23 +24,26 @@
 })();
 
 function inject_dice(){
+    const body = $('body');
+    add_styles(body);
+    add_gamelog(body);
+    add_message_broker(body);
+    add_dice(body);
+    add_observer()
+}
+
+function add_observer(){
     window.encounterBuilderObserver = new MutationObserver(function(mutationList, observer) {
         mutationList.forEach(mutation => {
             remove_injected_elements(mutation);
         });
     })
-    const body = $('body');
-    const mutation_target = body[0];
+
+    const mutation_target = $('#encounter-builder-root')[0];
     //observers changes to body direct children being removed/added
     const mutation_config = { attributes: false, childList: true, characterData: false, subtree: true };
     window.encounterBuilderObserver.observe(mutation_target, mutation_config);
-    add_styles(body);
-    add_gamelog(body);
-    add_message_broker(body);
-    add_dice(body);
 }
-
-
 function add_gamelog(container){
     const isMAPS = window.location.href.match(/\/games\/\d+/gi)
     const addGamelog = isMAPS ? '' : `<div id="game-log-client" data-targetingdisabled="true" data-config="{&quot;authUrl&quot;:&quot;https://auth-service.dndbeyond.com/v1/cobalt-token&quot;,&quot;baseUrl&quot;:&quot;https://www.dndbeyond.com&quot;,&quot;diceServiceUrl&quot;:&quot;https://dice-service.dndbeyond.com&quot;,&quot;diceThumbnailsUrl&quot;:&quot;https://www.dndbeyond.com/dice/images/thumbnails&quot;,&quot;ddbApiUrl&quot;:&quot;https://api.dndbeyond.com&quot;,&quot;debug&quot;:false,&quot;environment&quot;:&quot;production&quot;,&quot;launchDarkylyClientId&quot;:&quot;5c63387e40bda9329a652b74&quot;,&quot;production&quot;:true,&quot;version&quot;:&quot;4.0.1&quot;}" data-environment="production"><div class="tss-1r5d1qn-Notification"><button class="tss-1k8nyp9-gamelog-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1em" height="1em" class="tss-9hvl8q-gamelog-button__icon"><path d="M243.9 7.7C231.5.7 216.3.8 204 8L19.8 115.6C7.5 122.8 0 135.9 0 150.1v216.5c0 14.5 7.8 27.8 20.5 34.9l184 103c12.1 6.8 26.9 6.8 39.1 0l184-103c12.6-7.1 20.5-20.4 20.5-34.9V146.8c0-14.4-7.7-27.7-20.3-34.8zM71.8 140.8l152.4-89.1 152 86.2-152.4 90.3zM48 182.4l152 87.4v177.3L48 361.9zm200 264.7V269.7l152-90.1v182.3z"></path></svg>Game Log</button></div></div> <link href="https://media.dndbeyond.com/game-log-client/css/_dndbeyond_game_log_client.f9120ac7.css" rel="stylesheet">
@@ -57,7 +60,7 @@ function add_message_broker(container){
 function add_dice(container){
     container.append(`
 <div class="container no-transform">
-<div id="encounter-builder-root" data-config="{&quot;assetBasePath&quot;:&quot;https://media.dndbeyond.com/encounter-builder&quot;,&quot;authUrl&quot;:&quot;https://auth-service.dndbeyond.com/v1/cobalt-token&quot;,&quot;campaignDetailsPageBaseUrl&quot;:&quot;https://www.dndbeyond.com/campaigns&quot;,&quot;campaignServiceUrlBase&quot;:&quot;https://www.dndbeyond.com/api/campaign&quot;,&quot;characterServiceUrlBase&quot;:&quot;https://character-service-scds.dndbeyond.com/v2/characters&quot;,&quot;diceApi&quot;:&quot;https://dice-service.dndbeyond.com&quot;,&quot;gameLogBaseUrl&quot;:&quot;https://www.dndbeyond.com&quot;,&quot;ddbApiUrl&quot;:&quot;https://api.dndbeyond.com&quot;,&quot;ddbBaseUrl&quot;:&quot;https://www.dndbeyond.com&quot;,&quot;ddbConfigUrl&quot;:&quot;https://www.dndbeyond.com/api/config/json&quot;,&quot;debug&quot;:false,&quot;encounterServiceUrl&quot;:&quot;https://encounter-service.dndbeyond.com/v1&quot;,&quot;featureFlagsDomain&quot;:&quot;https://api.dndbeyond.com&quot;,&quot;mediaBucket&quot;:&quot;https://media.dndbeyond.com&quot;,&quot;monsterServiceUrl&quot;:&quot;https://monster-service.dndbeyond.com/v1/Monster&quot;,&quot;sourceUrlBase&quot;:&quot;https://www.dndbeyond.com/sources/&quot;,&quot;subscriptionUrl&quot;:&quot;https://www.dndbeyond.com/subscribe&quot;}" >
+<div id="encounter-builder-root" data-config="{&quot;assetBasePath&quot;:&quot;https://media.dndbeyond.com/encounter-builder&quot;,&quot;authUrl&quot;:&quot;https://auth-service.dndbeyond.com/v1/cobalt-token&quot;,&quot;campaignDetailsPageBaseUrl&quot;:&quot;https://www.dndbeyond.com/campaigns&quot;,&quot;campaignServiceUrlBase&quot;:&quot;https://www.dndbeyond.com/api/campaign&quot;,&quot;characterServiceUrlBase&quot;:&quot;https://character-service-scds.dndbeyond.com/v2/characters&quot;,&quot;diceApi&quot;:&quot;https://dice-service.dndbeyond.com&quot;,&quot;gameLogBaseUrl&quot;:&quot;https://www.dndbeyond.com&quot;,&quot;ddbApiUrl&quot;:&quot;https://api.dndbeyond.com&quot;,&quot;ddbBaseUrl&quot;:&quot;https://www.dndbeyond.com&quot;,&quot;ddbConfigUrl&quot;:&quot;https://www.dndbeyond.com/api/config/json&quot;,&quot;debug&quot;:false,&quot;encounterServiceUrl&quot;:&quot;https://encounter-service.dndbeyond.com/v1&quot;,&quot;featureFlagsDomain&quot;:&quot;https://api.dndbeyond.com&quot;,&quot;mediaBucket&quot;:&quot;https://media.dndbeyond.com&quot;,&quot;monsterServiceUrl&quot;:&quot;https://monster-service.dndbeyond.com/v1/Monster&quot;,&quot;sourceUrlBase&quot;:&quot;https://www.dndbeyond.com/sources/&quot;,&quot;subscriptionUrl&quot;:&quot;https://www.dndbeyond.com/subscribe&quot;,&quot;toastAutoDeleteInterval&quot;:3000000}" >
 <div class="encounter-details">
            </div>
            <div class="dice-rolling-panel">
