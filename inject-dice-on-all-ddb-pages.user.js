@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Inject Dice on all DDB pages
 // @namespace    github.com/azmoria
-// @version      0.7
+// @version      0.8
 // @description  Add dice to more DDB pages
 // @author       Azmoria
 // @downloadURL  https://github.com/Azmoria/dice-on-all-ddb-pages/raw/refs/heads/main/inject-dice-on-all-ddb-pages.user.js
@@ -39,10 +39,29 @@ function add_observer(){
         });
     })
 
-    const mutation_target = $('#encounter-builder-root')[0];
+    const mutation_target = $('body')[0];
     //observers changes to body direct children being removed/added
     const mutation_config = { attributes: false, childList: true, characterData: false, subtree: true };
     window.encounterBuilderObserver.observe(mutation_target, mutation_config);
+    setTimeout(function(){
+        window.encounterBuilderObserver.disconnect();
+        delete window.encounterBuilderObserver;
+    }, 20000);
+}
+function remove_injected_elements(mutation){
+    try {
+        let mutationTarget = $(mutation.target);
+        //Remove beyond20 popup and swtich to gamelog
+        if(mutationTarget.hasClass(['encounter-details', 'encounter-builder', 'release-indicator'])){
+            mutationTarget.remove();
+        }
+        if($(mutation.addedNodes).is('.encounter-builder, .release-indicator, [class*="-Notification"]')){
+            $(mutation.addedNodes).remove();
+        }
+
+    } catch{
+        console.warn("inject ddb dice failed to parse mutation", error, mutation);
+    }
 }
 function add_gamelog(container){
     const isMAPS = window.location.href.match(/\/games\/\d+/gi)
@@ -1258,20 +1277,6 @@ function add_styles(container){
         </style>`)
 }
 
-function remove_injected_elements(mutation){
-    try {
-        let mutationTarget = $(mutation.target);
-        //Remove beyond20 popup and swtich to gamelog
-        if(mutationTarget.hasClass(['encounter-details', 'encounter-builder', 'release-indicator'])){
-            mutationTarget.remove();
-        }
-        if($(mutation.addedNodes).is('.encounter-builder, .release-indicator, [class*="-Notification"]')){
-            $(mutation.addedNodes).remove();
-        }
 
-    } catch{
-        console.warn("inject ddb dice failed to parse mutation", error, mutation);
-    }
-}
 
 
