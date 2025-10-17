@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Inject Dice on all DDB pages
 // @namespace    github.com/azmoria
-// @version      0.8
+// @version      0.9
 // @description  Add dice to more DDB pages
 // @author       Azmoria
 // @downloadURL  https://github.com/Azmoria/dice-on-all-ddb-pages/raw/refs/heads/main/inject-dice-on-all-ddb-pages.user.js
@@ -13,7 +13,7 @@
 // @exclude     https://www.dndbeyond.com/*encounter*
 // @exclude     https://www.dndbeyond.com/*character*
 // @exclude     /^https://www.dndbeyond.com/campaigns/\d+$/
-
+// @exclude     /^https://www.dndbeyond.com/campaigns/\d+.*popoutgamelog=true.*/
 // @run-at       document-end
 
 // ==/UserScript==
