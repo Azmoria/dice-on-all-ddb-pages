@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Inject DDB Dice on all pages
 // @namespace    github.com/azmoria
-// @version      1.6
+// @version      1.7
 // @description  Adds D&D Beyond's new 3D dice roller to almost all DDB pages
 // @author       Azmoria
 // @downloadURL  https://github.com/Azmoria/dice-on-all-ddb-pages/raw/refs/heads/main/inject-dice-on-all-ddb-pages.user.js
@@ -21,7 +21,7 @@
 
     const DICE_TYPES = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100'];
     const DICE_PARSE_PATTERN = /([+-]?)(\d*)d(4|6|8|10|12|20|100)\b/gi;
-    const ROLL_BUTTON_PATTERN = /\(?\d+d(?:4|6|8|10|12|20|100)(?:\s*[+−-]\s*\d+)?\)?|\bd(?:4|6|8|10|12|20|100)\b|[+−-]\d+/gi;
+    const ROLL_BUTTON_PATTERN = /\(?\d+d(?:4|6|8|10(0)?|12|20)(?:\s*[+−-]\s*\d+)?\)?|\bd(?:4|6|8|10(0)?|12|20)\b|[+−-]\d+/gi;
     const state = {
         physicsWorker: undefined,
         renderer: undefined,
